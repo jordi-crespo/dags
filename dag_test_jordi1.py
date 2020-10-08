@@ -4,12 +4,12 @@ from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOpera
 from airflow.operators.dummy_operator import DummyOperator
 from kubernetes.client import models as k8s
 
-YESTERDAY = datetime.now() - timedelta(days=1)
+
 
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': YESTERDAY,
+    'start_date': datetime.now(),
     'email': ['j.crespoguzman@pharmmacess.org,m.mozena@Pharmaccess.org'],
     'email_on_failure': True,
     'email_on_retry': False,
