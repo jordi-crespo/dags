@@ -43,6 +43,7 @@ try:
         )
 
     start >> quay_k8s
+    
 except Exception as e:
 
     error_message = {
