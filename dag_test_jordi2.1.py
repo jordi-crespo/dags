@@ -11,7 +11,7 @@ import traceback
 try:
     config.load_kube_config()
     v1 = client.CoreV1Api()
-    secret = v1.read_namespaced_secret("azure-registry-dev", "default")
+    secret = v1.read_namespaced_secret("azure-registry", "default")
     default_args = {
         'owner': 'airflow',
         'depends_on_past': False,
@@ -31,7 +31,7 @@ try:
 
     quay_k8s = KubernetesPodOperator(
             namespace='default',
-            image='testingairlfowdags',
+            image='acrmcfdev1.azurecr.io/testingairlfowdags:latest',
             image_pull_secrets=[secret],
             name="testingairlfowdags",
             secrets=[secret],
