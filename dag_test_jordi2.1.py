@@ -22,22 +22,22 @@ try:
     }
 
     dag = DAG(
-        'jordi_test2', default_args=default_args, schedule_interval=timedelta(minutes=10))
+        'jordi_test1', default_args=default_args, schedule_interval=timedelta(minutes=10))
 
 
     start = DummyOperator(task_id='run_this_first', dag=dag)
 
-    
     quay_k8s = KubernetesPodOperator(
-    namespace='default',
-    name="passing-test7",
-    image='docker.io/test-pai-1',
-    image_pull_secrets='myregistrykey',
-    task_id="passing-task6",
-    get_logs=True,
-    dag=dag
-)
-
+            namespace='default',
+            name="passing-test",
+            image_pull_secrets='azure-registry',
+            image='acrmcfdev1.azurecr.io/testingairlfowdags',
+            cmds=["python","jordi_test.py"],
+            arguments=["print('hello world')"],
+            task_id="passing-task",
+            get_logs=True,
+            dag=dag
+        )
 
 
     start >> quay_k8s
