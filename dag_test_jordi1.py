@@ -31,7 +31,7 @@ try:
             namespace='default',
             image='docker.io/test-pai-1',
             image_pull_secrets=[k8s.V1LocalObjectReference('myregistrykey')],
-            task_id="passing-task",
+            task_id="passing-task6",
             get_logs=True,
             dag=dag
         )
