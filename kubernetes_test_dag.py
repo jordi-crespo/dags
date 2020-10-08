@@ -23,7 +23,7 @@ start = DummyOperator(task_id='run_this_first', dag=dag)
 
 passing = KubernetesPodOperator(namespace='default',
                           image="python:3.8-slim-buster",
-                          cmds=["Python","-c"],
+                          cmds=["python3","-c"],
                           arguments=["print('hello world')"],
                           labels={"foo": "bar"},
                           name="passing-test",
