@@ -29,12 +29,12 @@ try:
 
     quay_k8s = KubernetesPodOperator(
             namespace='default',
-            image='marcelotest',
+            image='testingairlfowdags',
             image_pull_secrets=[k8s.V1LocalObjectReference('azure-registry')],
             cmds=["python", "main.py"],
             arguments=["echo", "10", "echo pwd"],
             labels={"foo": "bar"},
-            name="marcelotest",
+            name="testingairlfowdags",
             is_delete_operator_pod=True,
             in_cluster=True,
             task_id="task-two",
@@ -43,7 +43,7 @@ try:
         )
 
     start >> quay_k8s
-    
+
 except Exception as e:
 
     error_message = {
