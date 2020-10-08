@@ -29,8 +29,9 @@ try:
 
     quay_k8s = KubernetesPodOperator(
             namespace='default',
-            image='test-pai-1',
-            image_pull_secrets=[k8s.V1LocalObjectReference('myregistrykey')],
+            image='acrmcfdev1.azurecr.io/testingairlfowdags',
+            cmds=["python","-c"],
+            arguments=["print('hello world')"],
             task_id="passing-task",
             get_logs=True,
             dag=dag
