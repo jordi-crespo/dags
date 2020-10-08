@@ -35,7 +35,7 @@ quay_k8s = KubernetesPodOperator(
         in_cluster=True,
         task_id="task-two",
         get_logs=True,
+        dag=dag
     )
 
-quay_k8s.set_upstream(start)
-
+start >> quay_k8s
