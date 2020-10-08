@@ -2,7 +2,7 @@ from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
 from airflow.operators.dummy_operator import DummyOperator
-from kubernetes.client import models as k8s
+from airflow.kubernetes.secret import Secret
 import logging
 import os
 import sys
@@ -36,10 +36,8 @@ try:
             in_cluster=True,
             task_id="task-two",
             get_logs=True,
-            log_events_on_failure = True,
             dag=dag
         )
-
 
     start >> quay_k8s
 
