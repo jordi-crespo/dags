@@ -4,7 +4,7 @@ from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOpera
 from airflow.operators.dummy_operator import DummyOperator
 from kubernetes.client import models as k8s
 
-YESTERDAY = datetime.datetime.now() - datetime.timedelta(days=1)
+YESTERDAY = datetime.now() - datetime.timedelta(days=1)
 
 default_args = {
     'owner': 'airflow',
@@ -18,7 +18,7 @@ default_args = {
 }
 
 dag = DAG(
-    'kubernetes_sample', default_args=default_args, schedule_interval=timedelta(minutes=10))
+    'jordi_test1', default_args=default_args, schedule_interval=timedelta(minutes=10))
 
 
 start = DummyOperator(task_id='run_this_first', dag=dag)
