@@ -30,13 +30,9 @@ try:
     quay_k8s = KubernetesPodOperator(
             namespace='default',
             image='acrmcfdev1.azurecr.io/testingairlfowdags:latest',
-            image_pull_secrets=[k8s.V1LocalObjectReference('azure-registry-dev')],
-            name="testingairlfowdags",
-            is_delete_operator_pod=True,
-            in_cluster=True,
-            task_id="task-two",
+            image_pull_secrets=[k8s.V1LocalObjectReference('azure-registry')],
+            task_id="passing-task",
             get_logs=True,
-            log_events_on_failure = True,
             dag=dag
         )
 
