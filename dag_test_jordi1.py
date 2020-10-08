@@ -51,4 +51,4 @@ except Exception as e:
             , "error information" : str(sys.exc_info())
             , "traceback": str(traceback.format_exc())
         }
-    logging(error_message)
+    logging.info(error_message)
