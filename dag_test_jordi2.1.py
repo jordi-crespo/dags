@@ -28,12 +28,15 @@ try:
     start = DummyOperator(task_id='run_this_first', dag=dag)
 
     quay_k8s = KubernetesPodOperator(
+           quay_k8s = KubernetesPodOperator(
             namespace='default',
-            image='test-pai-1',
-            image_pull_secrets=[k8s.V1LocalObjectReference('myregistrykey')],
-            task_id="passing-task",
+            name="passing-test7",
+            image='docker.io/test-pai-1',
+            image_pull_secrets=str([k8s.V1LocalObjectReference('myregistrykey')]),
+            task_id="passing-task6",
             get_logs=True,
             dag=dag
+        )
         )
 
 
