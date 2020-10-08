@@ -30,6 +30,7 @@ try:
     quay_k8s = KubernetesPodOperator(
             namespace='default',
             name="passing-test",
+            image_pull_secrets=[k8s.V1LocalObjectReference('azure-registry')],
             image='acrmcfdev1.azurecr.io/testingairlfowdags',
             cmds=["python3","-c"],
             arguments=["print('hello world')"],
