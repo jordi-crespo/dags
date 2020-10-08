@@ -11,7 +11,7 @@ import traceback
 try:
     config.load_kube_config()
     v1 = client.CoreV1Api()
-    secret = v1.read_namespaced_secret("azure-registry", "default")
+    secret = v1.read_namespaced_secret("azure-registry-dev", "default")
     default_args = {
         'owner': 'airflow',
         'depends_on_past': False,
