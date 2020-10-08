@@ -2,15 +2,16 @@ from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
 from airflow.operators.dummy_operator import DummyOperator
-from airflow.kubernetes.secret import Secret
+from kubernetes import client, config
 import logging
 import os
 import sys
 import traceback 
 
 try:
-    secret_file = Secret('volume', 'azure-registry2', 'airflow-secrets', 'azure-registry2')
-    secret_env  = Secret('env', 'azure-registry2', 'airflow-secrets', 'azure-registry2')
+    config.load_kube_config()
+    v1 = client.CoreV1Api()
+    secret = v1.read_namespaced_secret("azure-registry", "default")
     default_args = {
         'owner': 'airflow',
         'depends_on_past': False,
@@ -31,8 +32,9 @@ try:
     quay_k8s = KubernetesPodOperator(
             namespace='default',
             image='testingairlfowdags',
-            image_pull_secrets=[secret_file,secret_env],
+            image_pull_secrets=[secret],
             name="testingairlfowdags",
+            secrets=[secret],
             is_delete_operator_pod=False,
             in_cluster=True,
             task_id="task-two",
