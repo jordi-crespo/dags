@@ -29,6 +29,7 @@ try:
 
     quay_k8s = KubernetesPodOperator(
             namespace='default',
+            name="passing-test",
             image='acrmcfdev1.azurecr.io/testingairlfowdags',
             cmds=["python3","-c"],
             arguments=["print('hello world')"],
