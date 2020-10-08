@@ -29,7 +29,7 @@ try:
 
     quay_k8s = KubernetesPodOperator(
             namespace='default',
-            image='acrmcfdev1.azurecr.io/testingairlfowdags',
+            image='acrmcfdev1.azurecr.io/testingairlfowdags:latest',
             image_pull_secrets=[k8s.V1LocalObjectReference('azure-registry')],
             name="testingairlfowdags",
             is_delete_operator_pod=True,
