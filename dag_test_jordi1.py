@@ -31,7 +31,7 @@ try:
             namespace='default',
             image='testingairlfowdags',
             image_pull_secrets=[k8s.V1LocalObjectReference('azure-registry')],
-            cmds=["python", "main.py"],
+            cmds=["python", "jordi_test.py"],
             arguments=["echo", "10", "echo pwd"],
             labels={"foo": "bar"},
             name="testingairlfowdags",
