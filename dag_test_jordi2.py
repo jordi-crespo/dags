@@ -9,7 +9,8 @@ import sys
 import traceback 
 
 try:
-
+    secret_file = Secret('volume', 'azure-registry2', 'airflow-secrets', 'azure-registry2')
+    secret_env  = Secret('env', 'azure-registry2', 'airflow-secrets', 'azure-registry2')
     default_args = {
         'owner': 'airflow',
         'depends_on_past': False,
@@ -30,7 +31,7 @@ try:
     quay_k8s = KubernetesPodOperator(
             namespace='default',
             image='testingairlfowdags',
-            image_pull_secrets=[k8s.V1LocalObjectReference('azure-registry')],
+            image_pull_secrets=[secret_file,secret_env],
             name="testingairlfowdags",
             is_delete_operator_pod=False,
             in_cluster=True,
