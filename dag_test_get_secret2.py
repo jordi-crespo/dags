@@ -24,7 +24,7 @@ try:
     }
 
     dag = DAG(
-        'jordi_test1', default_args=default_args, schedule_interval=timedelta(minutes=10))
+        'jordi_test_get_secert2', default_args=default_args, schedule_interval=timedelta(minutes=10))
 
 
     start = DummyOperator(task_id='run_this_first', dag=dag)
