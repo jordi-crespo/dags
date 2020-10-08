@@ -28,9 +28,11 @@ try:
     start = DummyOperator(task_id='run_this_first', dag=dag)
 
     quay_k8s = KubernetesPodOperator(
-            namespace='default',
-            image='docker.io/test-pai-1:tagname',
-            image_pull_secrets=[k8s.V1LocalObjectReference('myregistrykey')],
+         namespace='default',
+            image='acrmcfdev1.azurecr.io/testingairlfowdags',
+            name="passing-test",
+            cmds=["python","-c"],
+            arguments=["print('hello world')"],
             task_id="passing-task",
             get_logs=True,
             dag=dag
